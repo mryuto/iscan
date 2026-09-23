@@ -6,6 +6,7 @@ import numpy as np
 
 
 def load_env(env_path: Path) -> None:
+    """Carga variables de entorno desde un archivo .env si existe."""
     if not env_path.exists():
         return
 
@@ -21,7 +22,10 @@ def load_env(env_path: Path) -> None:
 BASE_DIR = Path(__file__).resolve().parent
 load_env(BASE_DIR / '.env')
 
+# Ruta base donde se encuentran los rostros capturados
 dataPath = os.environ.get('DATA_DIR', str(BASE_DIR / 'data'))
+
+# Lista de carpetas (personas) en el directorio de datos
 peopleList = os.listdir(dataPath)
 print('Lista de personas: ', peopleList)
 
@@ -29,6 +33,7 @@ labels = []
 facesData = []
 label = 0
 
+# Recopila los rostros y sus etiquetas para entrenamiento
 for nameDir in peopleList:
     personPath = os.path.join(dataPath, nameDir)
     print('Leyendo las imágenes')
@@ -39,18 +44,14 @@ for nameDir in peopleList:
         facesData.append(cv2.imread(os.path.join(personPath, fileName), 0))
     label += 1
 
-# Métodos para entrenar el reconocedor
+# Crea y entrena el modelo de reconocimiento facial (EigenFace por defecto)
 face_recognizer = cv2.face.EigenFaceRecognizer_create()
-# face_recognizer = cv2.face.FisherFaceRecognizer_create()
-# face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-# Entrenando el reconocedor de rostros
+# Entrena el modelo
 print('Entrenando...')
 face_recognizer.train(facesData, np.array(labels))
 
-# Almacenando el modelo obtenido
+# Guarda el modelo entrenado
 model_path = os.environ.get('EIGENFACE_MODEL_PATH', str(BASE_DIR / 'modeloEigenFace.xml'))
 face_recognizer.write(model_path)
-# face_recognizer.write('modeloFisherFace.xml')
-# face_recognizer.write('modeloLBPHFace.xml')
 print('Modelo almacenado...')

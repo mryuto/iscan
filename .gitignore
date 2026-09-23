@@ -16,3 +16,5 @@ modeloEigenFace.xml
 # Python general
 __pycache__/
 *.pyc
+
+planilla-*.html
