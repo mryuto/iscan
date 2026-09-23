@@ -17,12 +17,12 @@ Ejecuta los scripts en este orden:
 ```bash
 python capturar.py
 python entrenar.py
-python reconocimientoFacial.py
+python iscan.py
 ```
 
 * `capturar.py` → Captura los rostros.
 * `entrenar.py` → Entrena el modelo.
-* `reconocimientoFacial.py` → Inicia el reconocimiento facial.
+* `iscan.py` → Inicia el reconocimiento facial.
 
 ## 🛠️ Tecnologías
 
@@ -37,7 +37,7 @@ python reconocimientoFacial.py
 ```text
 ├── capturar.py
 ├── entrenar.py
-├── reconocimientoFacial.py
+├── iscan.py
 ├── modeloEigenFace.xml
 ├── registro.html
 └── data/
