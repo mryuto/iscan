@@ -92,7 +92,7 @@ while True:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)  # Marca el rostro con un rectángulo rojo
             count = 0  # Reinicia el contador si el rostro es desconocido
 
-    if usuario and count == 100:  # Registra al usuario si ha sido identificado durante 100 iteraciones consecutivas
+    if usuario and count == 50:  # Registra al usuario si ha sido identificado durante 50s iteraciones consecutivas
         # 1 si entra, 0 si sale
         if usuario not in registro2:
             registro2.append(usuario)
